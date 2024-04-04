@@ -23,6 +23,13 @@
 </head>
 <body>
 
+    <c:if test="${not empty errorMessage}">
+        <div class="alert alert-danger" role="alert">
+            ${errorMessage}
+        </div>
+    </c:if>
+
+
 <div class="container">
     <div class="col-md-12">
         <h2 class="mb-6">Lista de Projetos</h2>

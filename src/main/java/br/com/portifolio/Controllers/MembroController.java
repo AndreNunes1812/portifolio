@@ -17,6 +17,7 @@ public class MembroController {
 
     @PostMapping
     public void save(@RequestBody @Valid Membro membro) {
+        System.out.println("Membro:"+membro);
         membroService.save(membro);
     }
 }

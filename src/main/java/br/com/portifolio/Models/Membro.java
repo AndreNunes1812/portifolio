@@ -1,11 +1,11 @@
 package br.com.portifolio.Models;
 
-import br.com.portifolio.Embeddable.MembroId;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @AllArgsConstructor
@@ -17,6 +17,13 @@ public class Membro  implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @EmbeddedId
-    private MembroId id;
+    @Id
+    @NotNull
+    @Column(name = "idprojeto")
+    private Long idProjeto;
+
+    @Column(name = "idpessoa")
+    private Long idPessoa;
+
+
 }

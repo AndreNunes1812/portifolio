@@ -21,6 +21,13 @@
     </style>
 </head>
 <body>
+
+    <c:if test="${not empty errorMessage}">
+        <div class="alert alert-danger" role="alert">
+            ${errorMessage}
+        </div>
+    </c:if>
+
     <div class="container">
         <div class="text-center">
             <h1>Lista de Pessoas</h1>
