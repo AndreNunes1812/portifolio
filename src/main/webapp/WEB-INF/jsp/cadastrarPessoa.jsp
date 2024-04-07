@@ -28,7 +28,7 @@
 <div class="container">
     <div class="col-md-6">
         <h2 class="mb-4">Cadastrar Pessoa</h2>
-        <form action="/cadastrar" method="POST">
+        <form action="/pessoas" method="POST">
             <div class="form-group">
                 <label for="nome">Nome:</label>
                 <input type="text" class="form-control" id="nome" name="nome" required>
@@ -50,7 +50,7 @@
                 <label class="form-check-label" for="gerente">Gerente</label>
             </div>
             <button type="submit" class="btn btn-primary mr-2">Cadastrar</button>
-            <a href="/menu" class="btn btn-secondary">Voltar para o Menu</a>
+            <a href="/menu" class="btn btn-secondary">Voltar</a>
         </form>
     </div>
 </div>

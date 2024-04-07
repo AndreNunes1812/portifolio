@@ -1,6 +1,5 @@
 package br.com.portifolio.Controllers;
 
-import br.com.portifolio.Models.Mappers.PessoaRowMapper;
 import br.com.portifolio.Models.Mappers.ProjetoRowMapper;
 import br.com.portifolio.Models.Pessoa;
 import br.com.portifolio.Models.Projeto;
@@ -12,15 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @Controller
+@RequestMapping("/projetos")
 public class ProjetoController {
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -31,9 +28,8 @@ public class ProjetoController {
     @Autowired
     PessoaService pessoaService;
 
-
     @GetMapping("/project")
-    public String cadastrarPProjeto(Model model) {
+    public String cadastrarProjeto(Model model) {
         List<Pessoa> gerentes = pessoaService.getAllPessoasGerentes();
         model.addAttribute("riscoValues", ProjetoClassificacao.values());
         model.addAttribute("statusValues", ProjetoStatus.values());
@@ -41,7 +37,7 @@ public class ProjetoController {
         return "cadastrarProjeto";
     }
 
-    @GetMapping("/projetos")
+    @GetMapping("")
     public String getAllProjetos(Model model) {
         List<Projeto> projetos = jdbcTemplate.query("SELECT * FROM projeto", new ProjetoRowMapper());
         model.addAttribute("projetos", projetos);
@@ -60,15 +56,10 @@ public class ProjetoController {
         if (projetoOptional.isPresent()) {
             Projeto projeto = projetoOptional.get();
 
-            System.out.println("projeto:"+projeto.getGerencial().getId() );
-
-
-
             model.addAttribute("riscoValues", ProjetoClassificacao.values());
             model.addAttribute("statusValues", ProjetoStatus.values());
             model.addAttribute("gerentes", gerentes);
             model.addAttribute("projeto", projeto);
-
 
         } else {
             model.addAttribute("errorMessage", "Projeto não encontrado.");
@@ -80,14 +71,13 @@ public class ProjetoController {
     @PostMapping("/editarProjeto")
     public String editarProjeto(@ModelAttribute("projeto") Projeto projeto) {
         projetoService.save(projeto);
-        return "redirect:/projeto";
+        return "redirect:/projetos";
     }
 
-    @PostMapping("/inProject")
+    @PostMapping("")
     public String insertProjeto(@ModelAttribute("projeto") Projeto projeto) {
-        System.out.println("cadastrar:"+projeto);
         projetoService.save(projeto);
-        return "redirect:/projetos";
+        return "redirect:projetos";
     }
 
     @GetMapping("/excluirProjeto")
@@ -97,7 +87,7 @@ public class ProjetoController {
 
         if(!projetoOptional.isPresent()){
             model.addAttribute("errorMessage", "Projeto  não encontrado.");
-            return "redirect:/projetos";
+            return "redirect:projetos";
         } else {
 
             if (projetoOptional.get().getStatus().toUpperCase().equals("INICIADO") || projetoOptional.get().getStatus().toUpperCase().equals("ANDAMENTO") || projetoOptional.get().getStatus().toUpperCase().equals("ENCERRADO")) {

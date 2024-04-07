@@ -45,5 +45,4 @@ public class Pessoa implements Serializable {
 
     @OneToMany(mappedBy = "gerencial")
     private List<Projeto> projetosGerenciados;
-
 }

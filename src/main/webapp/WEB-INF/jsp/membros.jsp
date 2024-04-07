@@ -5,14 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Pessoas</title>
+    <title>Lista de Membros</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         .container {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 80vh;
+            height: 70vh;
         }
 
         .table tbody tr:nth-child(even) {
@@ -30,38 +30,30 @@
 
     <div class="container">
         <div class="text-center">
-            <h1>Lista de Pessoas</h1>
-            <a href="/pessoas/cadastrar" class="btn btn-primary mr-3">Cadastrar Pessoa</a>
+            <h1>Lista de Membros</h1>
             <a href="menu" class="btn btn-secondary">Voltar</a>
             <table class="table">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>CPF</th>
-                        <th>Gerente</th>
-                        <th>Funcionário</th>
+                        <th>Nome da Pesosa</th>
+                        <th>Nome do Projeto</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                <c:forEach var="pessoa" items="${pessoas}">
+                <c:forEach var="membro" items="${membros}">
                     <tr>
-                        <td>${pessoa.id}</td>
-                        <td>${pessoa.nome}</td>
-                        <td>${pessoa.cpf}</td>
-                        <td>${pessoa.gerente ? 'Sim' : 'Não'}</td>
-                        <td>${pessoa.funcionario ? 'Sim' : 'Não'}</td>
-                         <td>
-                            <a href="/pessoas/editarPessoa?id=${pessoa.id}" class="btn btn-primary mr-1">Editar</a>
-                            <a href="/pessoas/excluirPessoa?id=${pessoa.id}" class="btn btn-danger btn-excluir" onclick="return confirm('Tem certeza que deseja excluir esta pessoa?')">Excluir</a>
+                        <td>${membro.pessoa.nome}</td>
+                        <td>${membro.projeto.nome}</td>
+                        <td>
+                            <a href="/membros/editarMembro?idProjeto=${membro.idProjeto}&idPessoa=${membro.idPessoa}" class="btn btn-primary mr-1">Editar</a>
+                            <a href="/membros/excluirMembro?idProjeto=${membro.idProjeto}&idPessoa=${membro.idPessoa}" class="btn btn-danger btn-excluir" onclick="return confirm('Tem certeza que deseja excluir este membro?')">Excluir</a>
                          </td>
                     </tr>
                 </c:forEach>
                 </tbody>
             </table>
-            </div>
         </div>
     </div>
 </body>

@@ -13,7 +13,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 70vh;
+            height: 80vh;
         }
         /* Espaçamento entre os botões */
         .btn {
@@ -33,8 +33,8 @@
 <div class="container">
     <div class="col-md-12">
         <h2 class="mb-6">Lista de Projetos</h2>
-        <a href="/menu" class="btn btn-primary">Voltar para o Menu</a>
-        <a href="/project" class="btn btn-success">Cadastrar Projeto</a>
+        <a href="/menu" class="btn btn-primary">Voltar</a>
+        <a href="/projetos/project" class="btn btn-success">Cadastrar Projeto</a>
         <div class="table-responsive mt-6">
             <table class="table">
                 <thead>
@@ -59,8 +59,8 @@
                             <td>${projeto.risco}</td>
                             <td>
                                 <div class="btn-group" role="group">
-                                    <a href="/editarProjeto?id=${projeto.id}" class="btn btn-primary">Editar</a>
-                                    <a href="/excluirProjeto?id=${projeto.id}" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este projeto?')">Excluir</a>
+                                    <a href="/projetos/editarProjeto?id=${projeto.id}" class="btn btn-primary">Editar</a>
+                                    <a href="/projetos/excluirProjeto?id=${projeto.id}" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este projeto?')">Excluir</a>
                                  </div>
                             </td>
                         </tr>

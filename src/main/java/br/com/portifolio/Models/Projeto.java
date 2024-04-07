@@ -54,5 +54,8 @@ public class Projeto implements Serializable {
     @JoinColumn(name = "idgerente")
     private Pessoa gerencial;
 
+    @OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL)
+    private List<Membro> membros;
+
 
 }

@@ -8,16 +8,13 @@
     <title>Cadastrar Projeto</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Ajustes para distanciar do topo */
         body {
             padding-top: 20px;
         }
-        /* Ajustes para adicionar barra de rolagem */
         .container {
             height: 70vh;
             overflow-y: auto;
         }
-        /* Estilo para cada campo de formulário */
         .form-group {
             margin-bottom: 20px;
         }
@@ -29,7 +26,7 @@
     <div class="row">
         <div class="col-md-6">
             <h2 class="mb-4">Cadastrar Projeto</h2>
-            <form action="/inProject" method="POST">
+            <form action="/projetos" method="POST">
                 <div class="form-group">
                     <label for="nome">Nome:</label>
                     <input type="text" class="form-control" id="nome" name="nome" required>
@@ -54,7 +51,7 @@
                       <label for="risco">Risco:</label>
                       <select class="form-control" id="status" name="status" required>
                          <c:forEach items="${statusValues}" var="status">
-                            <option value="${status}">${status}</option>
+                             <option value="${status}" <c:if test="${status eq projeto.status}">selected</c:if>>${status}</option>
                          </c:forEach>
                       </select>
                  </div>
@@ -79,7 +76,7 @@
                      </select>
                 </div>
                 <button type="submit" class="btn btn-primary mr-2">Cadastrar</button>
-                <a href="/menu" class="btn btn-secondary">Voltar</a>
+                <a href="/projetos" class="btn btn-secondary">Voltar</a>
             </form>
         </div>
     </div>

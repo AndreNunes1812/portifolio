@@ -8,16 +8,15 @@
     <title>Editar Projeto</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Ajustes para distanciar do topo */
         body {
             padding-top: 20px;
         }
-        /* Ajustes para adicionar barra de rolagem */
+
         .container {
-            height: 70vh;
+            height: 80vh;
             overflow-y: auto;
         }
-        /* Estilo para cada campo de formulário */
+
         .form-group {
             margin-bottom: 20px;
         }
@@ -29,7 +28,7 @@
     <div class="row">
         <div class="col-md-6">
             <h2 class="mb-4">Editar Projeto</h2>
-            <form action="/editarProjeto" method="POST">
+            <form action="/projetos/editarProjeto" method="POST">
                 <input type="hidden" name="id" value="${projeto.id}">
                 <div class="form-group">
                     <label for="nome">Nome:</label>

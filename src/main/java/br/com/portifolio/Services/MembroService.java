@@ -2,6 +2,7 @@ package br.com.portifolio.Services;
 
 
 import br.com.portifolio.Models.Membro;
+import br.com.portifolio.Models.MembroId;
 import br.com.portifolio.Repositories.MembroRepository;
 import br.com.portifolio.Repositories.PessoaRepository;
 import br.com.portifolio.Repositories.ProjetoRepository;
@@ -10,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MembroService{
@@ -23,6 +27,11 @@ public class MembroService{
     @Autowired
     PessoaRepository pessoaRepository;
 
+    @Autowired
+    public List<Membro> getAllMembros() {
+        return membroRepository.findAll();
+    }
+
     @Transactional
     public ResponseEntity<Object> save(Membro membro){
 
@@ -35,5 +44,15 @@ public class MembroService{
         }
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("ERRO: ao criar o membro");
+    }
+
+    public Optional<Membro> getOneMembro(Long idProjeto, Long idPessoa) {
+
+        return membroRepository.findByIdProjetoAndIdPessoa(idProjeto, idPessoa);
+    }
+
+    public void delete(Long idProjeto, Long idPessoa) {
+        MembroId membroId = new MembroId(idProjeto, idPessoa);
+        membroRepository.deleteById(membroId);
     }
 }

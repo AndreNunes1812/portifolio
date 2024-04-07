@@ -8,7 +8,6 @@
     <title>Editar Pessoa</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Ajustar o tamanho do formulário */
         form {
             max-width: 500px;
             margin: 0 auto;
@@ -18,7 +17,6 @@
             background-color: #f8f9fa;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        /* Espaçamento entre os elementos do formulário */
         .form-group {
             margin-bottom: 20px;
         }
@@ -27,7 +25,7 @@
 <body>
 
 <div class="container mt-5">
-    <form action="editarPessoa" method="POST">
+    <form action="/pessoas/editarPessoa" method="POST">
         <h2 class="mb-4">Editar Pessoa</h2>
         <input type="hidden" name="id" value="${pessoa.id}">
         <div class="form-group">
@@ -52,7 +50,7 @@
         </div>
         <div class="text-center">
             <button type="submit" class="btn btn-primary mr-2">Salvar</button>
-            <a href="pessoas" class="btn btn-secondary">Voltar</a>
+            <a href="/pessoas" class="btn btn-secondary">Voltar</a>
         </div>
     </form>
 </div>

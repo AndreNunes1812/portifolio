@@ -1,6 +1,5 @@
 package br.com.portifolio.Controllers;
 
-import br.com.portifolio.Models.Mappers.PessoaRowMapper;
 import br.com.portifolio.Models.Pessoa;
 import br.com.portifolio.Services.PessoaService;
 import br.com.portifolio.Services.ProjetoService;
@@ -9,15 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @Controller
+@RequestMapping("/pessoas")
 public class PessoaController {
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -31,9 +28,9 @@ public class PessoaController {
     @GetMapping("/cadastrar")
     public String cadastrarPessoas() {  return "cadastrarPessoa"; }
 
-    @GetMapping("/pessoas")
+    @GetMapping("")
     public String getAllPessoas(Model model) {
-        List<Pessoa> pessoas = jdbcTemplate.query("SELECT * FROM pessoa", new PessoaRowMapper());
+        List<Pessoa> pessoas = pessoaService.getAllPessoas();
         model.addAttribute("pessoas", pessoas);
         return "pessoas";
     }
@@ -57,7 +54,7 @@ public class PessoaController {
         return "redirect:/pessoas";
     }
 
-    @PostMapping("/cadastrar")
+    @PostMapping("")
     public String insertPessoa(@ModelAttribute("pessoa") Pessoa pessoa) {
         pessoaService.save(pessoa);
         return "redirect:/pessoas";
