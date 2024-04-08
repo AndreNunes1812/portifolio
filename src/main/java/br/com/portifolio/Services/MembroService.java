@@ -3,6 +3,7 @@ package br.com.portifolio.Services;
 
 import br.com.portifolio.Models.Membro;
 import br.com.portifolio.Models.MembroId;
+import br.com.portifolio.Models.Pessoa;
 import br.com.portifolio.Repositories.MembroRepository;
 import br.com.portifolio.Repositories.PessoaRepository;
 import br.com.portifolio.Repositories.ProjetoRepository;
@@ -26,6 +27,8 @@ public class MembroService{
 
     @Autowired
     PessoaRepository pessoaRepository;
+    @Autowired
+    PessoaService pessoaService;
 
     @Autowired
     public List<Membro> getAllMembros() {
@@ -55,4 +58,24 @@ public class MembroService{
         MembroId membroId = new MembroId(idProjeto, idPessoa);
         membroRepository.deleteById(membroId);
     }
+
+    public void validarFuncionario(MembroId membroId) {
+
+        Optional<Membro> membroResult = getOneMembro(membroId.getIdProjeto(), membroId.getIdPessoa());
+
+        if(membroResult.isPresent()) {
+            Membro membro = membroResult.get();
+
+            Optional<Pessoa> pessoa = pessoaService.getOnePessoa(membro.getIdPessoa());
+
+            if(pessoa.isPresent()){
+                if(pessoa.get().isFuncionario()){
+                    save(membro);
+                }
+            }
+        }
+
+    }
+
+
 }

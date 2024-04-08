@@ -21,12 +21,17 @@ public class PessoaService {
 
     @Autowired
     public List<Pessoa> getAllPessoas() {
-        return jdbcTemplate.query("SELECT * FROM pessoa", new PessoaRowMapper());
+        return pessoaRepository.findAll();
     }
 
     @Autowired
     public List<Pessoa> getAllPessoasGerentes() {
         return pessoaRepository.findByGerenteTrue();
+    }
+
+    @Autowired
+    public List<Pessoa> getAllPessoasFuncionarios() {
+        return pessoaRepository.findByFuncionarioIsTrue();
     }
 
     public void save(Pessoa pessoa) {

@@ -46,11 +46,7 @@ public class ProjetoController {
 
     @GetMapping(value = "/editarProjeto")
     public String findOneProjeto(@RequestParam("id") Long id, Model model) {
-        System.out.println("editarProjeto:");
         List<Pessoa> gerentes = pessoaService.getAllPessoasGerentes();
-
-        System.out.println("gerentes:"+gerentes.get(0).getNome());
-
         Optional<Projeto> projetoOptional = projetoService.getOneProjeto(id);
 
         if (projetoOptional.isPresent()) {

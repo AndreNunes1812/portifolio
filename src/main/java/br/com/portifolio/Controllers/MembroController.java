@@ -1,6 +1,9 @@
 package br.com.portifolio.Controllers;
 
 import br.com.portifolio.Models.Membro;
+import br.com.portifolio.Models.MembroId;
+import br.com.portifolio.Models.Pessoa;
+import br.com.portifolio.Models.Projeto;
 import br.com.portifolio.Services.MembroService;
 import br.com.portifolio.Services.PessoaService;
 import br.com.portifolio.Services.ProjetoService;
@@ -33,9 +36,8 @@ public class MembroController {
     }
 
     @PostMapping("")
-    public void save(@RequestBody @Valid Membro membro) {
-        System.out.println("Membro:"+membro);
-        membroService.save(membro);
+    public void save(@RequestBody MembroId membro) {
+        membroService.validarFuncionario(membro);
     }
 
     @Transactional
@@ -53,12 +55,13 @@ public class MembroController {
 
     @GetMapping(value = "/editarMembro")
     public String findOneMembro(@RequestParam("idProjeto") Long idProjeto, @RequestParam("idPessoa") Long idPessoa, Model model) {
+        List<Projeto> projetos = projetoService.getAllPprojetos();
         Optional<Membro> membroOptional = membroService.getOneMembro(idProjeto, idPessoa);
         if (membroOptional.isPresent()) {
             Membro membro = membroOptional.get();
+            model.addAttribute("projetos", projetos);
+            model.addAttribute("pessoas", pessoaService.getAllPessoasFuncionarios());
             model.addAttribute("membro", membro);
-            model.addAttribute("projetos", projetoService.getAllPprojetos());
-            model.addAttribute("pessoas", pessoaService.getAllPessoas());
         } else {
             model.addAttribute("errorMessage", "Membro/Projeto não encontrado.");
             return "redirect:/membros";

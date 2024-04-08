@@ -15,7 +15,7 @@
             <label for="projeto">Projeto:</label>
              <select class="form-control" id="projeto" name="projeto">
                      <c:forEach var="projeto" items="${projetos}">
-                        <option value="${projeto.id}" <c:if test="${projeto.id eq membro.projeto.id}">selected</c:if>>${projeto.nome}</option>
+                        <option value="${membro.projeto.id}">${membro.projeto.nome}</option>
                     </c:forEach>
             </select>
         </div>
